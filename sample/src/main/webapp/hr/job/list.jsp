@@ -23,7 +23,10 @@
 <%
 	}
 %>
-		 
 	</ul>
+	
+	<div>
+		<a href="form.jsp">신규 직종 등록</a>
+	</div>
 </body>
 </html>

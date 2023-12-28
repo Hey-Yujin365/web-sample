@@ -56,5 +56,17 @@ public class JobDao {
 		}, jobId);
 	}
 	
+	public void insertJob(Job job) {
+		String sql = """
+			insert into jobs
+			(job_id, job_title, min_salary, max_salary)
+			values
+			(?, ?, ?, ?)	
+				""";
+		JdbcTemplate.insert(sql, job.getId(),
+								 job.getTitle(),
+								 job.getMinSalary(), 
+								 job.getMaxSalary());
+	}
 	
 }
