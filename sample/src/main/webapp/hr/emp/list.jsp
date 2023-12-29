@@ -13,7 +13,7 @@
 	color: black;
 	}
 	
-	a.active {
+	.active {
 		font-weight: bold;
 		color: red;
 		text-decoration: none;
@@ -30,14 +30,14 @@
 	// 요청 URL : http://localhost/sample/hr/emp/list.jsp?page=x
 	
 	// 한 화면에 표시할 데이터행의 개수를 결정한다.
-	final int ROWS = 15;
+	final int ROWS = 10;
 	
 	// 요청파라미터값을 조회한다.
-	int pageNo = Integer.valueOf(request.getParameter("page"));
+	int currentPage = Integer.valueOf(request.getParameter("page"));
 	
 	// 페이지번호에 맞는 조회범위 계산하기
-	int start = (pageNo - 1)*ROWS +1;
-	int end = pageNo*ROWS;
+	int start = (currentPage - 1)*ROWS +1;
+	int end = currentPage*ROWS;
 	
 	// EMPLOYEES 테이블에 대한 CRUD작업이 구현된 EmployeeDao객체를 생성한다.
 	EmployeeDao employeeDao = new EmployeeDao();
@@ -76,18 +76,54 @@
 		</tbody>
 	</table>
 <%
+	// 한 화면에 표시할 페이지 개수를 결정한다.
+	final int PAGES = 5;
+	// 현재 요청한 페이지가 포함된 블록번호를 계산한다.
+	int currentBlock = (int)Math.ceil((double)currentPage/PAGES);
+	
 	// 총 직원수를 조회하기
 	int totalRows = employeeDao.getTotalRows();
 	
 	// 총 페이지 개수를 계산하기 (ceil 값을 구한다.)
 	int totalPages = (int)Math.ceil((double)totalRows/ROWS);
+	
+	// 총 블록 개수를 계산하기
+	int totalBlocks = (int)Math.ceil((double)totalPages/PAGES);
+	
+	// 화면에 출력할 페이지 범위 조회하기
+	int beginPage = (currentBlock - 1)*PAGES +1;
+	int endPage = (currentBlock == totalBlocks ? totalPages : currentBlock*PAGES);
 %>
 	<p>
+	
 <%
-	for (int num = 1; num <= totalPages; num++) {
+	if (currentPage > 1) {
+%>
+		<a href="list.jsp?page=<%=currentPage - 1 %>">이전</a>
+<%
+	} else {
+%>
+		<span>이전</span>
+<%
+	}
+%>
+
+<%
+	for (int num = beginPage; num <= endPage; num++) {
 %>
 		<a href="list.jsp?page=<%=num%>"
-			class="<%=pageNo == num ? "active" : "" %>"><%=num %></a>
+			class="<%=currentPage == num ? "active" : "" %>"><%=num %></a>
+<%
+	}
+%>
+<%
+	if (currentPage < totalPages) {
+%>
+		<a href="list.jsp?page=<%=currentPage + 1 %>">다음</a>
+<%
+	} else {
+%>		
+	<span>다음</span>
 <%
 	}
 %>
