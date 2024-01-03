@@ -10,7 +10,9 @@
 <title>커뮤니티</title>
 </head>
 <body>
-<%@ include file="include/navbar.jsp" %>
+<jsp:include page="include/navbar.jsp">
+	<jsp:param value="register" name="menu"/>
+</jsp:include>
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -39,7 +41,13 @@
 				<strong>회원가입 오류</strong> 이며 사용중인 아이디입니다.
 			</div>
 <%
-	} 
+	} else if ("email".equals(fail)) {
+%>
+			<div class="alert alert-danger">
+				<strong>회원가입 오류</strong> 이며 사용중인 이메일입니다.
+			</div>
+<%
+	}
 %>
 			<form class="border bg-light p-3" method="post" action="register.jsp">
 				<div class="form-group mb-3">
