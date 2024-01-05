@@ -56,7 +56,7 @@
 	Map<String, Object> param = new HashMap<>();
 	param.put("begin", pagination.getBegin());
 	param.put("end", pagination.getEnd());
-	
+
 	List<Board> boardList = boardDao.getBoards(param);
 	
 %>
@@ -104,18 +104,36 @@
 <%
 	/*
 		페이지 내비게이션 생성하기
-			시작페이지번호와 끝페이지번호를 조회해서 해당 범위만큼 표시한다.
+			1. 시작페이지번호와 끝페이지번호를 조회해서 해당 범위만큼 표시한다.
+			2. 현재 요청한 페이지가 첫페이지인지, 마지막페이지인지에 따라서
+			   이전/다음 링크를 활성화/비활성화한다.
 	*/
 	
 	int beginPage = pagination.getBeginPage();
 	int endPage = pagination.getEndPage();
+	
+	boolean isFirst = pagination.isFirst();
+	boolean isLast = pagination.isLast();
 %>
 			
 			<nav>
 				<ul class="pagination justify-content-center">
-					<li class="page-item">
-						<a class="page-link" href="">이전</a>
+<%
+	if (isFirst) {
+%>
+					<li class="page-item disabled">
+						<a class="page-link">이전</a>
 					</li>
+<%
+	} else {
+%>
+					<li class="page-item">
+						<a class="page-link" href="list.jsp?page=<%=currentPage - 1%>">이전</a>
+					</li>
+<%	
+	}
+%>
+
 <%
 	for (int num = beginPage; num <= endPage; num++) {
 %>			
@@ -125,9 +143,21 @@
 <%
 	}
 %>
-					<li class="page-item">
-						<a class="page-link" href="">다음</a>
+<%
+	if (isLast) {
+%>
+					<li class="page-item disabled">
+						<a class="page-link">다음</a>
 					</li>
+<%
+	} else {
+%>
+					<li class="page-item">
+						<a class="page-link" href="list.jsp?page=<%=currentPage + 1%>">다음</a>
+					</li>
+<%
+	}
+%>
 				</ul>
 			</nav>
 			

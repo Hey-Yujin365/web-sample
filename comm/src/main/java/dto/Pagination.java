@@ -61,7 +61,7 @@ public class Pagination {
 		this.currentBlock = (int) Math.ceil((double) currentPage/pages);
 		
 		// 게시글 조회범위 계산하기
-		this.begin = (currentPage -1)*rows + 1;
+		this.begin = (currentPage - 1)*rows + 1;
 		this.end = currentPage*rows;
 		
 		// 페이지 내비게이션 출력 범위 계산하기

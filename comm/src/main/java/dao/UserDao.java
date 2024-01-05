@@ -17,7 +17,7 @@ public class UserDao {
 	 * @param user 신규 사용자정보
 	 */
 	public void insertUser(User user) throws SQLException {
-		ibatis.insert("insertUser", user);
+		ibatis.insert("users.insertUser", user);
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class UserDao {
 	 * @throws SQLException
 	 */
 	public User getUserById(String id) throws SQLException {
-		return (User)ibatis.queryForObject("getUserById", id);
+		return (User)ibatis.queryForObject("users.getUserById", id);
 	}
 	
 	/**
@@ -37,6 +37,6 @@ public class UserDao {
 	 * @throws SQLException
 	 */
 	public User getUserByEmail(String email) throws SQLException {
-		return (User)ibatis.queryForObject("getUserByEmail", email);
+		return (User)ibatis.queryForObject("users.getUserByEmail", email);
 	}
 }
