@@ -45,6 +45,9 @@
 <%
 	} else if ("deleted".equals(error)){
 %>
+			<div class="alert alert-danger">
+				<strong>로그인 실패</strong> 탈퇴한 회원입니다.
+			</div>
 <%
 	} else if ("deny".equals(error)){
 %>
