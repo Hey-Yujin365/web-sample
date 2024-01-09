@@ -41,19 +41,23 @@ public class FileBoard {
 		this.description = description;
 	}
 	
-	public synchronized String getFileName() {
+	public String getFileName() {
 		return fileName;
 	}
 	
-	public synchronized void setFileName(String fileName) {
+	public String getRealFileName() {
+		return fileName.substring(13);
+	}
+
+	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
-	public synchronized long getFileSize() {
+
+	public long getFileSize() {
 		return fileSize;
 	}
-	
-	public synchronized void setFileSize(long fileSize) {
+
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 

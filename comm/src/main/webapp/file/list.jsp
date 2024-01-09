@@ -55,7 +55,7 @@
 			 			<td><%=fb.getUser().getName() %></td>
 			 			<td><%=DateUtils.toText(fb.getCreatedDate()) %></td>
 			 			<td>
-			 				<a href=""><%=fb.getFileName() %></a>
+			 				<a href="download?no=<%=fb.getNo() %>"><%=fb.getRealFileName() %></a>
 			 			</td>
 			 		</tr>
 <%
