@@ -9,11 +9,6 @@
 <%
 	LoginUser loginUser = (LoginUser) session.getAttribute("LOGIN_USER");
 	
-	if (loginUser == null) {
-		response.sendRedirect("../loginform.jsp?error=deny");
-		return;
-	}
-	
 	int categoryNo = NumberUtils.toInt(request.getParameter("categoryNo"));
 	String title = request.getParameter("title");
 	String expectedDate = request.getParameter("expectedDate");

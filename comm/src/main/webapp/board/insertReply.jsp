@@ -8,10 +8,6 @@
     pageEncoding="UTF-8"%>
 <%
 	LoginUser loginUser = (LoginUser) session.getAttribute("LOGIN_USER");
-	if (loginUser == null) {
-		response.sendRedirect("/comm/loginform.jsp?error=deny");
-		return;
-	}
 	
 	/*
 		요청 URL

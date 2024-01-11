@@ -12,10 +12,6 @@
 			* 요청메세지의 바디부에 포함되어 전달된다.
 	*/
 	LoginUser loginUser = (LoginUser) session.getAttribute("LOGIN_USER");
-	if (loginUser == null) {
-		response.sendRedirect("/comm/loginform.jsp?error=deny");
-		return;
-	}
 	
 	// 1. 요청파라미터 조회하기
 	int no = Integer.valueOf(request.getParameter("no"));
