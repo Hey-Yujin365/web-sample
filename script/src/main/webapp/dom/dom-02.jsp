@@ -18,7 +18,7 @@
 			
 			<div id="box" class="border p-3 mt-3">
 				<p id="intro"  class="box-text">첫 번째 엘리먼트</p>
-				<p id="box-text">두 번째 엘리먼트</p>
+				<p class="box-text">두 번째 엘리먼트</p>
 				<p>세 번째 엘리먼트</p>
 				<p>네 번째 엘리먼트</p>
 				<p>다섯 번째 엘리먼트</p>
@@ -27,8 +27,8 @@
 				<button onclick="handler1()">아이디로 선택하기</button>
 				<button onclick="handler2()">태그명으로 선택하기</button>
 				<button onclick="handler3()">클래스명으로 선택하기</button>
-				<button>css 선택자로 엘리먼트 하나 선택하기</button>
-				<button>css 선택자로 엘리먼트 여러 개 선택하기</button>
+				<button onclick="handler4()">css 선택자로 엘리먼트 하나 선택하기</button>
+				<button onclick="handler5()">css 선택자로 엘리먼트 여러 개 선택하기</button>
 			</div>
 		</div>
 	</div>
@@ -42,6 +42,8 @@
 	
 			Element				querySelector(css선택자)
 			NodeList			querySelectorAll(css선택자)
+	
+			* NodeList는 배열과 유사한 객체다.
 	*/
 	
 	function handler1() {
@@ -66,6 +68,38 @@
 			let el = nodeList[index];
 			// display 스타일 속성을 "block"으로 지정하면 엘리먼크가 화면에 표시된다.
 			el.style.display = '';}
+	}
+	
+	function handler4() {
+		// 엘리머트 하나 찾기
+		let el1 = document.querySelector("#intro");
+		let el2 = document.querySelector("p");
+		let el3 = document.querySelector(".box-text");
+		
+		el1.style.color = 'blue';
+		el2.style.color = 'green';
+		el3.style.backgroundcolor = '#eee';
+	}
+	
+	function handler5() {
+		// 엘리먼트 전부 찾기
+		
+		// p엘리먼트 5개가 선택된다.
+		let nodeList1 = document.querySelectorAll("p");
+		// p엘리먼트 2개가 선택된다.
+		let nodeList2 = document.querySelectorAll(".box-text");
+		
+		for (let index = 0; index < nodeList1.length; index++) {
+			let el = nodeList1[index];
+			el.style.border = '1px solid red';
+		}
+		
+		for (let index = 0; index < nodeList2.length; index++) {
+			let el = nodeList2[index];
+			el.style.backgroundColor = '#eee';
+		}
+		
+		
 	}
 </script>
 </body>
