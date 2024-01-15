@@ -50,6 +50,10 @@
 	// 선택된 엘리먼트의 콘텐츠 변경하기
 	let element4 = document.getElementById("el-4");
 	element4.textContent = "텍스트 콘텐츠 바꾸기";
+	
+	// 선택된 엘리먼트 삭제하기
+	let element5 = document.getElementById("el-5");
+	element5.remove();
 </script>
 </body>
 </html>
