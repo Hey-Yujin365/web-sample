@@ -19,7 +19,6 @@
 			<h1>로그인 폼</h1>
 			
 <%
-
 	/*
 		요청 URL
 			+ 로그인 메뉴를 클릭해서 요청할 때
@@ -58,7 +57,10 @@
 	}
 %>
 
-			<form class="border bg-light p-3" method="post" action="login.jsp">
+			<form class="border bg-light p-3"
+				method="post"
+				action="login.jsp"
+				onsubmit="checkForm(event)">
 				<div class="form-group">
 					<label class="form-label">아이디</label>
 					<input type="text" class="form-control" name="id" />
@@ -75,5 +77,29 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function checkForm(event) {
+		// 1. 아이디, 비밀번호 입력필드 엘리먼트를 조회한다.
+		let idInput = document.querySelector("input[name=id]");
+		let passwordInput = document.querySelector("input[name=password]");
+		
+		// 2. 아이디, 비밀번호 입력필드의 값을 조회한다.
+		let id = idInput.value.trim();
+		let password = passwordInput.value.trim();
+		
+		// 3. 아이디, 비밀번호 값을 체크한다.
+		if (id === "") {
+			alert("아이디를 입력하세요.");
+			event.preventDefault();
+			return;
+		}
+		
+		if (password === "") {
+			alert("비밀번호를 입력하세요.");
+			event.preventDefault();
+			return;
+		}
+	}
+</script>
 </body>
 </html>
