@@ -50,6 +50,9 @@
 			<li class="nav-item">
 				<a class="nav-link <%="hr".equals(menu) ? "active" : "" %>" href="/comm/hr/dept.jsp">인사관리</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link <%="movie".equals(menu) ? "active" : "" %>" href="/comm/boxoffice/search.jsp">박스오피스</a>
+			</li>
 		</ul>
 <%
 	if (loginUser != null) {

@@ -63,6 +63,14 @@
 <script type="text/javascript">
 	function getEmployees(id, event) {
 		event.preventDefault();
+		
+		let prevElement = document.querySelector(".list-group-item.active");
+		if (prevElement) {
+			prevElement.classList.remove("active");
+		}
+		
+		let element = event.target;
+		element.classList.add("active");
 	
 		let xhr = new XMLHttpRequest();					// xhr 객체 생성
 		xhr.onreadystatechange = function() {			// 이벤트 핸들러 등록
