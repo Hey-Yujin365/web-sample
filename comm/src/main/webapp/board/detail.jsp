@@ -66,7 +66,6 @@
 <%
 	}
 %>
-		
 			<table class="table">
 				<colgroup>
 					<col width="15%">

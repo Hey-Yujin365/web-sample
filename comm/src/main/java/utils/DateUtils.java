@@ -18,6 +18,7 @@ public class DateUtils {
 		}
 		
 		return DATE_FORMAT.format(date);
-	
 	}
+
+	
 }
