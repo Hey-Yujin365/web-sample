@@ -8,12 +8,12 @@
 
 	<select id="getAllBoards" resultClass="vo.Board">
 		select
-			b.board_no 			as no,
-			b.board_title 		as title,
+			b.board_no 				as no,
+			b.board_title 			as title,
 			b.board_content 		as content,
-			b.board_read_count 	as readCount,
+			b.board_read_count 		as readCount,
 			b.board_created_date 	as createdDate,
-			b.user_id 			as "user.id",
+			b.user_id 				as "user.id",
 			u.user_name 			as "user.name"
 		from
 			sample_boards B, sample_users U
