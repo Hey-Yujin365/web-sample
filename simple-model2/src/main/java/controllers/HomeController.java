@@ -27,6 +27,7 @@ public class HomeController {
 		return "loginform.jsp";
 	}
 	
+		
 	@RequestMapping(path = "/register.do", method = HttpMethod.GET)
 	public String form(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
@@ -46,7 +47,18 @@ public class HomeController {
 		} catch (Exception ex) {
 			return "redirect:login.do?error=fail";
 		}
+	}
+	
+	@RequestMapping(path ="/logout.do")
+	public String logout(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		// false로 준 이유 : 세션이 획득 될 경우에만 파괴하기 위해서 false로 준다.
+		// 세션이 없으면 굳이 만들어서 파괴할 이유가 없기 때문에 true혹은 생략하지 않는다.
+		HttpSession session = req.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
 		
+		return "redirect:home.do";
 	}
 	
 	@RequestMapping(path = "/register.do", method = HttpMethod.POST)
