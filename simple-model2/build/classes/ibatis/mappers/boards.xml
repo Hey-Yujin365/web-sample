@@ -6,36 +6,64 @@
 	
 <sqlMap namespace="boards">
 
-	<select id="getAllBoards" resultClass="vo.Board">
+	<select id="getTotalRows" resultClass="int">
 		select
-			b.board_no 				as no,
+			count(*)
+		from
+			sample_boards
+		where
+			board_deleted = 'N'
+	
+	</select>
+
+	<select id="getAllBoards" parameterClass="map" resultClass="vo.Board">
+		select
+			*
+		from (
+				select
+					row_number() over (order by B.board_no desc) as rn,
+					b.board_no 				as no,
+					b.board_title 			as title,
+					b.board_content 		as content,
+					b.board_read_count 		as readCount,
+					b.board_created_date 	as createdDate,
+					b.user_id 				as "user.id",
+					u.user_name 			as "user.name"
+				from
+					sample_boards B, sample_users U
+				where
+					B.board_deleted = 'N'
+					and U.user_id = B.user_id)
+		where rn between #begin# and #end#
+	</select>
+	
+	<select id="getBoardByNo" parameterClass="int" resultClass="vo.Board">
+		select
+			b.board_no				as no,
 			b.board_title 			as title,
 			b.board_content 		as content,
 			b.board_read_count 		as readCount,
+			b.board_updated_date	as updatedDate,
 			b.board_created_date 	as createdDate,
+			b.board_deleted			as deleted,
 			b.user_id 				as "user.id",
 			u.user_name 			as "user.name"
 		from
 			sample_boards B, sample_users U
 		where
-			B.board_deleted = 'N'
-			and U.user_id = B.user_id
-		order by
-			B.board_no desc
-	</select>
-	
-	<select id="getBoardByNo" parameterClass="int" resultClass="vo.Board">
-	
+			B.board_no = #value#
+			and B.board_deleted = 'N'
+			and B.user_id = U.user_id
 	</select>
 	
 	<insert id="insertBoard" parameterClass="vo.Board">
-		insert sample_boards
+		insert into sample_boards
 		(board_no, board_title, board_content, user_id)
 		values
-		(boards_seq.nextval, #title#, #content#, #user.id#)
+		(board_seq.nextval, #title#, #content#, #user.id#)
 	</insert>
 
-	<update id="updateBaord" parameterClass="vo.Board">
+	<update id="updateBoard" parameterClass="vo.Board">
 		update sample_boards
 		set
 			board_title = #title#,
